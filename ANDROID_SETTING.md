@@ -3,7 +3,8 @@
 brew tap AdoptOpenJDK/openjdk
 brew install --cask adoptopenjdk8
 
-echo export JAVA_HOME=`/usr/libexec/java_home -v 11` >> ~/.zshrc
+echo export JAVA_HOME=`/usr/libexec/java_home -v 1.8` >> ~/.zshrc
+source ~/.zshrc
 ```
 
 ### android sdk 설치

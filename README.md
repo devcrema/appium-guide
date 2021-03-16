@@ -1,6 +1,7 @@
 # appium-guide
 
 여기에 작성된 스크립트들은 모두 mac os, linux 기준으로 작성되었음.
+
 windows의 경우에는 WSL(Windows Subsystem for Linux)를 사용하는 것을 권장함
 
 ### brew가 없다면
