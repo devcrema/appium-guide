@@ -27,18 +27,25 @@ object AndroidDriverManager {
         val classpathRoot = File(System.getProperty("user.dir"))
         val appDir = File(classpathRoot, "../apps")
         val app = File(appDir.canonicalPath, "ApiDemos-debug.apk")
-        val capabilities = getRealDeviceCapabilities(app.absolutePath)
+        val capabilities = getCapabilitiesByConfig(app.absolutePath)
         return AndroidDriver<WebElement>(getAppiumService().url, capabilities)
     }
 
-    fun getCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
+    private fun getCapabilitiesByConfig(path: String): DesiredCapabilities =
+        when (System.getProperty("CONF_RUNNING_TARGET", "EMULATOR")) {
+            "DEVICE" -> getRealDeviceCapabilities(path)
+            "EMULATOR" -> getEmulatorCapabilities(path)
+            else -> getEmulatorCapabilities(path)
+        }
+
+    private fun getEmulatorCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
         setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
         setCapability(MobileCapabilityType.PLATFORM_VERSION, "8")
         setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator")
         setCapability("app", absolutePath)
     }
 
-    fun getRealDeviceCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
+    private fun getRealDeviceCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
         setCapability(MobileCapabilityType.DEVICE_NAME, "Android")
         setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
         setCapability("app", absolutePath)

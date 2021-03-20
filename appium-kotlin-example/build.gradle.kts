@@ -40,6 +40,19 @@ subprojects {
             jvmTarget = "1.8"
         }
     }
+
+    tasks.register<Test>("emulatorTest") {
+        group = "verification"
+        environment("CONF_RUNNING_TARGET", "EMULATOR")
+        useJUnitPlatform()
+    }
+
+    tasks.register<Test>("deviceTest") {
+        group = "verification"
+        environment("CONF_RUNNING_TARGET", "DEVICE")
+        useJUnitPlatform()
+    }
+
 }
 
 tasks.withType<Test> {
