@@ -46,13 +46,13 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-project(":sample-android"){
+project(":android-example"){
     dependencies {
         implementation(project(":core"))
     }
 }
 
-project(":sample-ios"){
+project(":ios-example"){
     dependencies {
         implementation(project(":core"))
     }

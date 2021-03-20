@@ -1,6 +1,6 @@
 rootProject.name = "appium-kotlin-example"
 include(
     "core",
-    "sample-android",
-    "sample-ios"
+    "android-example",
+    "ios-example"
 )
