@@ -38,12 +38,12 @@ appium-doctor --android
 appium
 ```
 
-아니면 gui에서 서버 시작버튼을 눌러도 됨.
-기본 서버 port는 4723
-포트를 바꾸려면 appium -p 포트
+- 아니면 gui에서 서버 시작버튼을 눌러도 됨.
+- 기본 서버 port는 4723
+- 포트를 바꾸려면 appium -p 포트
 
 ### Driver 설정
-appium은 각 플랫폼을 driver를 통해 지원하기 때문에 각 driver 설정이 필요함
+appium은 각 플랫폼을 driver를 통해 지원하기 때문에 각 driver에 대한 이해가 필요함
 - The XCUITest Driver (for iOS and tvOS apps)
 - The Espresso Driver (for Android apps) (앱 내부 검증)
 - The UiAutomator2 Driver (for Android apps) (앱 이외 화면과 여러앱을 검증)
@@ -51,8 +51,8 @@ appium은 각 플랫폼을 driver를 통해 지원하기 때문에 각 driver �
 - The Mac Driver (for Mac Desktop apps)
 
 ### client 설정
-appium은 HTTP 서버기 때문에 client없이는 동작할 수 없음.
-또한 selenium에서 쓰이는 WebDriver Protocol을 이용하기 때문에 관련된 라이브러리를 이용할 수도 있고
+- appium은 HTTP 서버기 때문에 client없이는 동작할 수 없음.
+- selenium에서 쓰이는 WebDriver Protocol을 이용하기 때문에 관련된 라이브러리를 이용할 수도 있고
 순수하게 http 요청으로 짤수도 있고 appium에서 제공하는 sdk를 이용할 수도 있음.
 - https://github.com/appium/java-client
 - https://github.com/appium/python-client

@@ -7,24 +7,39 @@ echo export JAVA_HOME=`/usr/libexec/java_home -v 1.8` >> ~/.zshrc
 source ~/.zshrc
 ```
 
-### android sdk 설치
+## android sdk 설치
+### android studio 없이 brew로만 사용
 ```shell
-# set path
-mkdir -p ~/.android-home
-echo export ANDROID_HOME=~/.android-home >> ~/.zshrc
-# install android-sdk and link
 brew install --cask android-sdk
-ANDROID_SDK_HOME=$(brew info android-sdk | grep -o -m 1 -E ".+\/android-sdk\S+")
-ln -s $ANDROID_SDK_HOME/tools ~/.android-home/tools
-# install android-platform-tools and link
-brew install --cask android-platform-tools
-ANDROID_PLATFORM_TOOL_HOME=$(brew info android-platform-tools | grep -o -m 1 -E ".+\/android-platform-tools\/.+\/platform-tools")
-ln -s $ANDROID_PLATFORM_TOOL_HOME ~/.android-home/platform-tools
+brew install --cask intel-haxm
+echo export ANDROID_HOME=/usr/local/share/android-sdk >> ~/.zshrc
 source ~/.zshrc
-
-# 설치 후 확인
-appium-doctor --android
+sdkmanager "platform-tools" "emulator" "extras;intel;Hardware_Accelerated_Execution_Manager" "platforms;android-27" "build-tools;27.0.0" "system-images;android-27;google_apis;x86"
+avdmanager create avd -n test_avd -k "system-images;android-27;google_apis;x86"
+# change emulator link
+unlink /usr/local/bin/emulator
+ln -s /usr/local/share/android-sdk/emulator/emulator /usr/local/bin/emulator
 ```
+### emulator 사용법
+```shell
+# list
+emulator -list-avds
+# run
+emulator -avd test_avd
+```
+### 다른 종류의 emulator 등록
+```shell
+# list
+avdmanager list device
+# set -n [name of avd] -d [number of device]
+avdmanager create avd -n name_of_avd -d 17 -k "system-images;android-27;google_apis;x86"
+```
+
+### 설치 후 확인
+- `appium-doctor --android`
+
+### 만약 mac에서 확인되지 않은 개발자라고 하며 emulator를 실행할 수 없다고 나오면?
+- `xattr -d com.apple.quarantine emulator`
 
 ### 추가 기능 설치 (필요시)
 ```shell
