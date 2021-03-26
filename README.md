@@ -42,6 +42,15 @@ appium
 - 기본 서버 port는 4723
 - 포트를 바꾸려면 appium -p 포트
 
+## Android 설정
+[Android 설정](ANDROID_SETTING.md)
+
+## ios 설정
+[ios 설정](IOS_SETTING.md)
+
+## Appium desktop 사용법
+[appium desktop](APPIUM_DESKTOP.md)
+
 ### Driver 설정
 appium은 각 플랫폼을 driver를 통해 지원하기 때문에 각 driver에 대한 이해가 필요함
 - The XCUITest Driver (for iOS and tvOS apps)
@@ -58,9 +67,3 @@ appium은 각 플랫폼을 driver를 통해 지원하기 때문에 각 driver에
 - https://github.com/appium/python-client
 - https://github.com/webdriverio/webdriverio
 - https://github.com/appium/appium-dotnet-driver
-
-## Android 설정
-[Android 설정](ANDROID_SETTING.md)
-
-## ios 설정
-[ios 설정](IOS_SETTING.md)

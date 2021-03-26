@@ -7,11 +7,17 @@ echo export JAVA_HOME=`/usr/libexec/java_home -v 1.8` >> ~/.zshrc
 source ~/.zshrc
 ```
 
+## intel haxm 설치
+- **사용하는 CPU가 intel인 경우에만 설치**
+- **다른 CPU를 사용하는 경우에는 별도의 가상화 관련 설정 필요**
+```shell
+brew install --cask intel-haxm
+```
+
 ## android sdk 설치
 ### android studio 없이 brew로만 사용
 ```shell
 brew install --cask android-sdk
-brew install --cask intel-haxm
 echo export ANDROID_HOME=/usr/local/share/android-sdk >> ~/.zshrc
 source ~/.zshrc
 sdkmanager "platform-tools" "emulator" "extras;intel;Hardware_Accelerated_Execution_Manager" "platforms;android-27" "build-tools;27.0.0" "system-images;android-27;google_apis;x86"

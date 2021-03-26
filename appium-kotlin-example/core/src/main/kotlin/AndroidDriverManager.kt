@@ -13,8 +13,7 @@ object AndroidDriverManager {
 
     fun getAppiumService(): AppiumDriverLocalService {
         if (appiumService == null) {
-            // run local AppiumDriverLocalService.buildDefaultService()
-            // bind remote
+            // bind remote or create local server
             appiumService = AppiumDriverLocalService.buildService(AppiumServiceBuilder().withIPAddress("127.0.0.1"))
         }
         if (!appiumService!!.isRunning) {
@@ -27,25 +26,11 @@ object AndroidDriverManager {
         val classpathRoot = File(System.getProperty("user.dir"))
         val appDir = File(classpathRoot, "../apps")
         val app = File(appDir.canonicalPath, "ApiDemos-debug.apk")
-        val capabilities = getCapabilitiesByConfig(app.absolutePath)
+        val capabilities = getCapabilities(app.absolutePath)
         return AndroidDriver<WebElement>(getAppiumService().url, capabilities)
     }
 
-    private fun getCapabilitiesByConfig(path: String): DesiredCapabilities =
-        when (System.getProperty("CONF_RUNNING_TARGET", "EMULATOR")) {
-            "DEVICE" -> getRealDeviceCapabilities(path)
-            "EMULATOR" -> getEmulatorCapabilities(path)
-            else -> getEmulatorCapabilities(path)
-        }
-
-    private fun getEmulatorCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
-        setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
-        setCapability(MobileCapabilityType.PLATFORM_VERSION, "8")
-        setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator")
-        setCapability("app", absolutePath)
-    }
-
-    private fun getRealDeviceCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
+    private fun getCapabilities(absolutePath: String): DesiredCapabilities = DesiredCapabilities().apply {
         setCapability(MobileCapabilityType.DEVICE_NAME, "Android")
         setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
         setCapability("app", absolutePath)

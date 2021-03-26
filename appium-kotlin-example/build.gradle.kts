@@ -41,31 +41,18 @@ subprojects {
         }
     }
 
-    tasks.register<Test>("emulatorTest") {
-        group = "verification"
-        environment("CONF_RUNNING_TARGET", "EMULATOR")
+    tasks.withType<Test> {
         useJUnitPlatform()
     }
-
-    tasks.register<Test>("deviceTest") {
-        group = "verification"
-        environment("CONF_RUNNING_TARGET", "DEVICE")
-        useJUnitPlatform()
-    }
-
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-project(":android-example"){
+project(":android-example") {
     dependencies {
         implementation(project(":core"))
     }
 }
 
-project(":ios-example"){
+project(":ios-example") {
     dependencies {
         implementation(project(":core"))
     }
