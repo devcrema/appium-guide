@@ -1,7 +1,11 @@
 import io.appium.java_client.android.Activity
 import io.appium.java_client.android.AndroidDriver
+import io.appium.java_client.android.AndroidElement
 import org.junit.jupiter.api.*
+import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
 
 
 @DisplayName("홈화면 테스트")
@@ -12,7 +16,7 @@ class BasicInteractionTest {
 
     @BeforeEach
     fun beforeEach() {
-        driver.startActivity(Activity(AndroidConstants.PACKAGE, AndroidConstants.ALERT_DIALOG_ACTIVITY))
+
     }
 
     @AfterEach
@@ -21,7 +25,7 @@ class BasicInteractionTest {
     }
 
     @Test
-    @DisplayName("given alert dialog activity를 열고 when 버튼을 클릭하면 then 항목들이 제대로 나와야한다.")
+    @DisplayName("alert dialog 테스트")
     fun testAlertDialog() {
         Tester.given("Open the Alert Dialog activity of the android app") {
             driver.startActivity(Activity(AndroidConstants.PACKAGE, AndroidConstants.ALERT_DIALOG_ACTIVITY))
@@ -35,6 +39,30 @@ class BasicInteractionTest {
                 driver.findElementById("android:id/alertTitle").text
             )
             driver.findElementById("android:id/button1").click()
+        }
+    }
+
+    @Test
+    @DisplayName("search 테스트")
+    fun test() {
+        val searchKeyword = "Hello world!"
+        Tester.given("open search activity") {
+            driver.startActivity(Activity(AndroidConstants.PACKAGE, AndroidConstants.SEARCH_ACTIVITY))
+        }
+        Tester.given("fill searchBox") {
+            val searchBox = driver.findElementById("txt_query_prefill") as AndroidElement
+            searchBox.sendKeys(searchKeyword)
+        }
+        Tester.`when`("click search button") {
+            val searchButton = driver.findElementById("btn_start_search")
+            searchButton.click()
+        }
+        Tester.then("resulting message should appear within 300ms") {
+            val searchText = WebDriverWait(
+                driver,
+                300
+            ).until(ExpectedConditions.visibilityOfElementLocated(By.id("android:id/search_src_text")))
+            Assertions.assertEquals(searchKeyword, searchText.text)
         }
     }
 }
