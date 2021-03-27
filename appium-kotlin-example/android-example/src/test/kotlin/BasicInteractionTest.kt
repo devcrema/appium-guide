@@ -38,7 +38,7 @@ class BasicInteractionTest {
                 "Lorem ipsum dolor sit aie consectetur adipiscing\nPlloaso mako nuto siwuf cakso dodtos anr koop.",
                 driver.findElementById("android:id/alertTitle").text
             )
-            driver.findElementById("android:id/button1").click()
+            Assertions.assertDoesNotThrow { driver.findElementById("android:id/button1").click() }
         }
     }
 
@@ -57,7 +57,7 @@ class BasicInteractionTest {
             val searchButton = driver.findElementById("btn_start_search")
             searchButton.click()
         }
-        Tester.then("resulting message should appear within 300ms") {
+        Tester.then("resulting message should appear within 300ms", 0) {
             val searchText = WebDriverWait(
                 driver,
                 300
