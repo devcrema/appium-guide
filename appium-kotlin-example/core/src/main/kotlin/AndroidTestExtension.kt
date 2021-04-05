@@ -1,14 +1,28 @@
-import org.junit.jupiter.api.extension.AfterAllCallback
-import org.junit.jupiter.api.extension.BeforeAllCallback
-import org.junit.jupiter.api.extension.ExtensionContext
+import org.junit.jupiter.api.extension.*
 
-class AndroidTestExtension: BeforeAllCallback, AfterAllCallback{
+class AndroidTestExtension: BeforeAllCallback, AfterAllCallback, BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
     override fun beforeAll(context: ExtensionContext) {
-        AndroidDriverManager.getAppiumService()
+        AppiumDriverManager.getAppiumService()
     }
 
     override fun afterAll(context: ExtensionContext) {
-        AndroidDriverManager.getAppiumService().stop()
+        AppiumDriverManager.getAppiumService().stop()
+    }
+
+    override fun beforeTestExecution(context: ExtensionContext?) {
+        context?.testClass?.ifPresent { testClass ->
+            context.testMethod?.ifPresent { method ->
+                ScreenshotManager.androidScreenshot("${testClass.simpleName}_${method.name}_1")
+            }
+        }
+    }
+
+    override fun afterTestExecution(context: ExtensionContext?) {
+        context?.testClass?.ifPresent { testClass ->
+            context.testMethod?.ifPresent { method ->
+                ScreenshotManager.androidScreenshot("${testClass.simpleName}_${method.name}_2")
+            }
+        }
     }
 }
