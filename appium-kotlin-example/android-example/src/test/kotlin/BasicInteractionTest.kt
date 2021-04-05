@@ -38,12 +38,12 @@ class BasicInteractionTest {
                 "Lorem ipsum dolor sit aie consectetur adipiscing\nPlloaso mako nuto siwuf cakso dodtos anr koop.",
                 driver.findElementById("android:id/alertTitle").text
         )
-        driver.findElementById("android:id/button1").click()
+        Assertions.assertDoesNotThrow { driver.findElementById("android:id/button1").click() }
     }
 
     @Test
     @DisplayName("search 테스트")
-    fun test() {
+    fun testSearchText() {
         // given open search activity and fill saerch box
         val searchKeyword = "Hello world!"
         driver.startActivity(Activity(AndroidConstants.PACKAGE, AndroidConstants.SEARCH_ACTIVITY))
