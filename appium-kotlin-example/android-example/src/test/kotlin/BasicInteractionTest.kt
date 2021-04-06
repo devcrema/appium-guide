@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait
 
 
 @DisplayName("홈화면 테스트")
-@AndroidTest
+@MobileTest
 class BasicInteractionTest {
 
     private val driver: AndroidDriver<WebElement> = AppiumDriverManager.getAndroidDriver()

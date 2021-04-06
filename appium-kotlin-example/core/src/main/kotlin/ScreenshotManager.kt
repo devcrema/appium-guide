@@ -20,4 +20,12 @@ object ScreenshotManager {
                     .copyTo(target = File(screenshotPath, "$filename.jpg"))
         }
     }
+
+    fun iosScreenshot(filename: String = UUID.randomUUID().toString()) {
+        if (AppiumDriverManager.isIosDriverExists()) {
+            AppiumDriverManager.getIosDriver()
+                .getScreenshotAs(OutputType.FILE)
+                .copyTo(target = File(screenshotPath, "$filename.jpg"))
+        }
+    }
 }

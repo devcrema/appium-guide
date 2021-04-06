@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.extension.*
 
-class AndroidTestExtension: BeforeAllCallback, AfterAllCallback, BeforeTestExecutionCallback, AfterTestExecutionCallback {
+class TestExtension: BeforeAllCallback, AfterAllCallback, BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
     override fun beforeAll(context: ExtensionContext) {
         AppiumDriverManager.getAppiumService()
