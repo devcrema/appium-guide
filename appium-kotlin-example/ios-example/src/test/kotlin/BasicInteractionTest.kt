@@ -24,19 +24,19 @@ class BasicInteractionTest {
         // given Find Button element
         val buttonElementId = "show alert"
         val buttonElement = WebDriverWait(driver, 30)
-            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId(buttonElementId))) as IOSElement
+            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.id(buttonElementId))) as IOSElement
 
         // when click on it and Wait for the alert to show up
         buttonElement.click()
         val alertTitleId = "Cool title"
         val alertTitleElement = WebDriverWait(driver, 30)
-            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId(alertTitleId))) as IOSElement
+            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.id(alertTitleId))) as IOSElement
 
         // then Check the text and Dismiss the alert
         val alertTitle = alertTitleElement.text
         Assertions.assertEquals(alertTitle, "Cool title")
         val okButtonElement = WebDriverWait(driver, 30)
-            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("OK"))) as IOSElement
+            .until(ExpectedConditions.visibilityOfElementLocated(MobileBy.id("OK"))) as IOSElement
         okButtonElement.click()
     }
 }
